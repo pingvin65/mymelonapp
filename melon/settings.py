@@ -10,8 +10,26 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
+import logging
 import os
+
 import django_heroku
+
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.DEBUG)
+
+formatter = logging.Formatter('%(asctime)s:%(name)s:%(message)s')
+
+file_handler = logging.FileHandler('settings.log')
+file_handler.setLevel(logging.ERROR)
+file_handler.setFormatter(formatter)
+
+stream_handler = logging.StreamHandler()
+stream_handler.setFormatter(formatter)
+
+logger.addHandler(file_handler)
+logger.addHandler(stream_handler)
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -19,11 +37,13 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '+%!qr0*t62rfkis+sa%17c^vro*v*^@^!=pug=8h-fzu&%$8^@'
-
+# SECRET_KEY = '+%!qr0*t62rfkis+sa%17c^vro*v*^@^!=pug=8h-fzu&%$8^@'
+SECRET_KEY = os.environ.get('MELON_SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
+# DEBUG = True
+DEBUG = os.environ.get('MELON_DEBUG')
+if DEBUG:
+    logger.debug(' DEBUG is {}'.format( os.environ.get('MELON_DEBUG')))
 ALLOWED_HOSTS = ["mymelonapp.herokuapp.com", "localhost", "127.0.0.1", "10.10.1.105", "10.10.1.107"]
 # ALLOWED_HOSTS = ["*"]
 # Application definition
@@ -81,29 +101,17 @@ WSGI_APPLICATION = 'melon.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
-
-DATABASES = {
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.sqlite3',
-    #     'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    # }
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.mysql',
-    #     'NAME': 'melon',
-    #     'USER': 'melon',
-    #     'PASSWORD': 'meloNpassword1~',
-    #     'HOST': 'localhost',
-    #     'PORT': '3306'
-    # }
-    'default': {
-            'ENGINE': 'django.db.backends.postgresql_psycopg2',
-            'NAME': 'melon',
-            'USER': 'melon',
-            'PASSWORD': 'melonpassword',
-            'HOST': 'localhost',
-            'PORT': '',
+if os.environ.get('MELON_DEBUG'):
+    DATABASES = {
+        'default': {
+                'ENGINE': 'django.db.backends.postgresql_psycopg2',
+                'NAME': os.environ.get('MELON_DBNAME'),
+                'USER': os.environ.get('MELON_DBUSER'),
+                'PASSWORD': os.environ.get('MELON_DBPASSWORD'),
+                'HOST': os.environ.get('MELON_DBHOST'),
+                'PORT': os.environ.get('MELON_DBPORT'),
+        }
     }
-}
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
@@ -126,8 +134,18 @@ AUTH_PASSWORD_VALIDATORS = [
 REST_FRAMEWORK = {
     # 'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
     'DEFAULT_PAGINATION_CLASS': 'melon.contact.core.pagination.MelonLimitOffsetPagination',
-    # MelonPagination
-    'PAGE_SIZE': 50
+    # MelonPagination size
+    'PAGE_SIZE': 50,
+    # comment DEFAULT_RENDERER_CLASSES block, under development
+    # 'DEFAULT_RENDERER_CLASSES': (
+    #     'rest_framework.renderers.JSONRenderer',
+    # ),
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+    ],
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+    ]
 }
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
@@ -151,31 +169,26 @@ REACT_APP_DIR = os.path.join(BASE_DIR, 'melonfront')
 
 STATICFILES_DIRS = (
     os.path.join(REACT_APP_DIR, 'build', 'static'),  # update the STATICFILES_DIRS
-    # os.path.join(REACT_APP_DIR, 'resources', 'static'),
-
 )
 
-
-CORS_ORIGIN_ALLOW_ALL = True
-
+# start CORS and CSRF
+CORS_ORIGIN_ALLOW_ALL = False
+# CORS_ORIGIN_ALLOW_ALL if True, then it can be blocked by IP or Name, so the code to the end line has no effect
 CORS_ALLOW_CREDENTIALS = True
 CORS_ORIGIN_WHITELIST = [
     "https://mymelonapp.herokuapp.com",
     "http://localhost:3000",
     "http://127.0.0.1:3000",
-    "http://localhost",
-    "http://127.0.0.1",
-    "http://localhost:8000",
-    "http://127.0.0.1:8000",
-    'http://10.10.1.105:3000',
-    'http://10.10.1.107',
 ]
 
 CSRF_TRUSTED_ORIGINS = [
     'mymelonapp.herokuapp.com'
     'localhost',
     '127.0.0.1',
-    '10.10.1.107',
 ]
 
+
+SECURE_HSTS_SECONDS = 518400
+
+# end ORS and CSRF
 django_heroku.settings(locals())

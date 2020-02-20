@@ -16,10 +16,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path, re_path
 from rest_framework import routers
-from melon.users import views
 from rest_framework.authtoken import views as view_token
+
 from melon.contact import views as views_contact
 from melon.home import views as views_home
+from melon.users import views
 
 router = routers.DefaultRouter()
 router.register(r'users', views.UserViewSet)
@@ -27,8 +28,7 @@ router.register(r'groups', views.GroupViewSet)
 router.register(r'contact', views_contact.ContactCreateListRetrieveViewSet)
 router.register(r'contacts', views_contact.ContactList)
 router.register(r'con', views_contact.ContactViewSet, basename='con')
-# router.register(r'con', views_contact.ContactViewSet)
-# router.register(r'api-token-auth/', views_contact.CustomAuthToken, basename='AuthToken')
+
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.
 urlpatterns = [
@@ -41,13 +41,7 @@ urlpatterns = [
         path('api-auth/', view_token.obtain_auth_token),
         path('admin/', admin.site.urls),
     ])),
-    # path('api/v1/', include(router.urls)),
-    # path('api/v1/api-auth/', include('rest_framework.urls', namespace='rest_framework')),
-    # path('api/v1/api-token-auth/', views_contact.CustomAuthToken.as_view()),
-    # path('api/v1/api-auth/', view_token.obtain_auth_token),
-    # # path('con/', views_contact.ContactViewSet.as_view({'get': 'list'})),
-    # path('api/v1/admin/', admin.site.urls),
-    # path('', views_home.index, name='home'),r'^.*'
+
     re_path(r'^.*', views_home.FrontendAppView.as_view(), name='home'),
 ]
 

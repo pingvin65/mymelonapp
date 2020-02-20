@@ -102,10 +102,8 @@ class HomePage extends React.Component {
         return (
             <div>
                 <h2>Contacts</h2>
-                <Status status={this.state.status} />
-                {/* <AppContext.Consumer>
-                    {(context) => context.number}
-                </AppContext.Consumer> */}
+                <Status status={this.state.status} page={'home'}/>
+                <MelonPagation dataPagation={this.state.pagination} trigerGetData={this.getDataonClikPagination}/>
                 <Contacts contacts={this.state.contacts} />
                 <MelonPagation dataPagation={this.state.pagination} trigerGetData={this.getDataonClikPagination}/>
             </div>

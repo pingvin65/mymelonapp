@@ -1,7 +1,7 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
-import { LinkContainer } from "react-router-bootstrap";
-import { Button, Table } from 'react-bootstrap';
+import { Table } from 'react-bootstrap';
 class Contacts extends React.Component {
     constructor(props) {
         super(props);
@@ -39,9 +39,8 @@ class Contacts extends React.Component {
         if (Array.isArray(listItems) && listItems.length) {
             var coter = 1;
             return (<tbody>{listItems.map((contact) => <tr key={contact.id.toString()}>
-                <td className="align-middle">{coter++}</td>
-                <td className="align-middle">{contact.first_name} {contact.last_name}</td>
-                <td className="align-middle"><LinkContainer to={`/contact/${contact.id}/`}><Button className="table-button-list">Details</Button></LinkContainer></td>
+                <td className="align-middle col-sm-1">{coter++}</td>
+                <td className="align-middle"><Link to={`/contact/${contact.id}/`}>{contact.first_name} {contact.last_name}s</Link></td>
             </tr>
             )}</tbody>);
         } else {
@@ -57,10 +56,16 @@ class Contacts extends React.Component {
                     <tr>
                         <th>#</th>
                         <th>Contact</th>
-                        <th> </th>
+                        {/* <th> </th> */}
                     </tr>
                 </thead>
                 {this.listItem(this.state.contacts)}
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Contact</th>
+                    </tr>
+                </thead>
             </Table>);
     }
 }

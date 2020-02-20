@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 
 function Status(props) {
     
+    console.log(props);
     
     function refreshPage() {
         window.location.reload(false);
@@ -28,7 +29,8 @@ function Status(props) {
         localStorage.removeItem('melondata');
         
         return (<div>
-            <h5>{props.status}</h5>
+            {(props.page === 'home') ? <h5>Please login</h5> : <h5>{props.status}</h5>} 
+            {/* <h5>{props.status}</h5> */}
             <Link to='/login'>login</Link>
         </div>);
     }
