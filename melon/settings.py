@@ -44,8 +44,8 @@ SECRET_KEY = os.environ.get('MELON_SECRET_KEY')
 DEBUG = os.environ.get('MELON_DEBUG')
 if DEBUG:
     logger.debug(' DEBUG is {}'.format( os.environ.get('MELON_DEBUG')))
-ALLOWED_HOSTS = ["mymelonapp.herokuapp.com", "localhost", "127.0.0.1", "10.10.1.105", "10.10.1.107"]
-# ALLOWED_HOSTS = ["*"]
+# list of allowed hosts
+ALLOWED_HOSTS = ["mymelonapp.herokuapp.com", "localhost", "127.0.0.1", "10.10.1.*"]
 # Application definition
 
 INSTALLED_APPS = [
@@ -179,12 +179,16 @@ CORS_ORIGIN_WHITELIST = [
     "https://mymelonapp.herokuapp.com",
     "http://localhost:3000",
     "http://127.0.0.1:3000",
+    "http://10.10.1.*:3000",
+    "http://10.10.1.*:3000",
 ]
 
 CSRF_TRUSTED_ORIGINS = [
     'mymelonapp.herokuapp.com'
     'localhost',
     '127.0.0.1',
+    '10.10.1.*',
+    '10.10.1.*',
 ]
 
 

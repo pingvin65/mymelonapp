@@ -39,8 +39,8 @@ class Contacts extends React.Component {
         if (Array.isArray(listItems) && listItems.length) {
             var coter = 1;
             return (<tbody>{listItems.map((contact) => <tr key={contact.id.toString()}>
-                <td className="align-middle col-sm-1">{coter++}</td>
-                <td className="align-middle"><Link to={`/contact/${contact.id}/`}>{contact.first_name} {contact.last_name}s</Link></td>
+                <td className="align-middle">{coter++}</td>
+                <td className="align-middle col-sm-11"><Link to={`/contact/${contact.id}/`}>{contact.first_name} {contact.last_name}s</Link></td>
             </tr>
             )}</tbody>);
         } else {

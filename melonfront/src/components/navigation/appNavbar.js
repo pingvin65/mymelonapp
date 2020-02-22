@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { LinkContainer } from "react-router-bootstrap";
 import { AppContext } from '../../appContext';
 
-import { Navbar, Nav /* For Search box, Form, Button, FormControl */ } from 'react-bootstrap';
+import { Navbar, Nav } from 'react-bootstrap';
 import LoginForm from './loginForm';
 
 class AppNavBar extends React.Component {
@@ -32,10 +32,10 @@ class AppNavBar extends React.Component {
         }
     }
 
-    componentDidUpdate(){
+    componentDidUpdate() {
 
-        if (this.state.login !== this.context.login){
-            this.setState({login: this.context.login});
+        if (this.state.login !== this.context.login) {
+            this.setState({ login: this.context.login });
         }
     }
     render() {
@@ -49,7 +49,7 @@ class AppNavBar extends React.Component {
 
         return (
 
-            <Navbar bg="light" expand="md">
+            <Navbar bg="primary" variant="dark" expand="md"  >
                 <div className="container">
                     <LinkContainer to="/">
                         <Navbar.Brand href="#">
@@ -68,11 +68,10 @@ class AppNavBar extends React.Component {
                             <Link className="nav-link" to="/">Home</Link>
                             {loginLink}
                         </Nav>
-                        {/* <Form inline>
-                            <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-                            <Button variant="outline-success">Search</Button>
-                        </Form> */}
-                        <LoginForm trigerAppNavBar={this.handleChildClick} />
+                        <div className=" navbar-nav">
+                            <Link className="nav-link" to="/about">About</Link>
+                            <LoginForm trigerAppNavBar={this.handleChildClick} />
+                        </div>
                     </Navbar.Collapse>
                 </div>
             </Navbar>

@@ -78,7 +78,9 @@ class HomePage extends React.Component {
 
 
     componentDidMount() {
-        this.getAllData();
+        if(this.props.isLogin){
+            this.getAllData();
+        }
     }
 
     getDataonClikPagination(setLimit=null, setOffset=null){
@@ -94,10 +96,11 @@ class HomePage extends React.Component {
     }
 
     render() {
+   console.log(this.state.isLogin);
    
         
         if (this.props.isLogin === false) {
-            return <Redirect to='/login' />;
+            return <Redirect to={{pathname:'/login', state:{ message: "You need to log in"}}} />;
         }
         return (
             <div>
