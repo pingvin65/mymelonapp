@@ -279,10 +279,103 @@ Running migrations:
 ```
 ### Inset in the table contact data from `contact.json`
 ```
-$ ./manage.py loaddata contact.json 
+(env) $ ./manage.py loaddata contact.json 
 2020-02-23 02:45:28,613:melon.settings: DEBUG is True
 Installed 1000 object(s) from 1 fixture(s)
 (env) $ 
 ```
 [Continued from Front end](melonfront/README.md)
+
+##  When you have built react portion of APP 
+Run the command in the root directory where the manage.py Python script is located.
+```
+(env) $  ./manage.py collectstatic
+2020-02-23 04:41:57,383:melon.settings: DEBUG is True
+
+178 static files copied to '/home/pingvin/Documents/melon-project/mymelonapp/staticfiles', 552 post-processed.
+(env) $
+```
+
+# Install React part of project
+```
+(env) $ cd melonfront
+(env) $ npm install
+
+> core-js@2.6.11 postinstall /home/pingvin/Documents/github/mymelonapp/melon/melonfront/node_modules/babel-runtime/node_modules/core-js
+> node -e "try{require('./postinstall')}catch(e){}"
+
+Thank you for using core-js ( https://github.com/zloirock/core-js ) for polyfilling JavaScript standard library!
+
+The project needs your help! Please consider supporting of core-js on Open Collective or Patreon: 
+> https://opencollective.com/core-js 
+> https://www.patreon.com/zloirock 
+
+Also, the author of core-js ( https://github.com/zloirock ) is looking for a good job -)
+
+
+> core-js@3.6.4 postinstall /home/pingvin/Documents/github/mymelonapp/melon/melonfront/node_modules/core-js
+> node -e "try{require('./postinstall')}catch(e){}"
+
+
+> core-js-pure@3.6.4 postinstall /home/pingvin/Documents/github/mymelonapp/melon/melonfront/node_modules/core-js-pure
+> node -e "try{require('./postinstall')}catch(e){}"
+
+npm WARN optional SKIPPING OPTIONAL DEPENDENCY: fsevents@1.2.11 (node_modules/webpack-dev-server/node_modules/fsevents):
+npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for fsevents@1.2.11: wanted {"os":"darwin","arch":"any"} (current: {"os":"linux","arch":"x64"})
+npm WARN optional SKIPPING OPTIONAL DEPENDENCY: fsevents@1.2.11 (node_modules/watchpack/node_modules/fsevents):
+npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for fsevents@1.2.11: wanted {"os":"darwin","arch":"any"} (current: {"os":"linux","arch":"x64"})
+npm WARN optional SKIPPING OPTIONAL DEPENDENCY: fsevents@1.2.11 (node_modules/jest-haste-map/node_modules/fsevents):
+npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for fsevents@1.2.11: wanted {"os":"darwin","arch":"any"} (current: {"os":"linux","arch":"x64"})
+npm WARN optional SKIPPING OPTIONAL DEPENDENCY: fsevents@2.1.2 (node_modules/fsevents):
+npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for fsevents@2.1.2: wanted {"os":"darwin","arch":"any"} (current: {"os":"linux","arch":"x64"})
+
+added 1622 packages from 801 contributors and audited 909237 packages in 20.151s
+
+44 packages are looking for funding
+  run `npm fund` for details
+
+found 2 low severity vulnerabilities
+  run `npm audit fix` to fix them, or `npm audit` for details
+pingvin@pingvin:~/Documents/github/mymelonapp/melon/melonfront$ 
+```
+if you have message **found x low severity vulnerabilities** 
+run 
+```
+(env) $ npm audit fix
+```
+### Runs the app in the development mode.
+```
+(env) $ npm start
+```
+
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+
+The page will reload if you make edits.  
+You will also see any lint errors in the console.
+
+### Builds the app for production
+```
+(env) $ npm run build
+```
+
+Builds the app for production to the `build` folder.  
+It correctly bundles React in production mode and optimizes the build for the best performance.
+
+The build is minified and the filenames include the hashes.  
+Your app is ready to be deployed!
+
+### Back to root directory
+```
+(env) $ cd ../
+```
+## Build the App into one complete unit
+### The staticfiles app
+```
+(env) $ ./manage.py collectstatic
+```
+Now we can finally launch the app as one complete unit.
+```
+(env) $ ./manage.py runserver
+```
+
 
