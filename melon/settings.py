@@ -101,6 +101,7 @@ WSGI_APPLICATION = 'melon.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
+# if os.environ.get('MELON_DEBUG') not True, then the project it run on heroku
 if os.environ.get('MELON_DEBUG'):
     DATABASES = {
         'default': {
