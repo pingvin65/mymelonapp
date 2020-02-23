@@ -1,0 +1,90 @@
+@import url('https://fonts.googleapis.com/css?family=PT+Sans&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Oswald&display=swap');
+@import url(https://fonts.googleapis.com/css?family=Courgette:200,300,400,700);
+$headings-font-family:Courgette;
+
+$font-family-sans-serif: Courgette;
+$font-family-base: $font-family-sans-serif;
+
+$font-size-base: 1rem;
+
+
+$h1-font-size:                $font-size-base * 2;
+$h2-font-size:                $font-size-base * 1.7;
+$h3-font-size:                $font-size-base * 1.5;
+$h4-font-size:                $font-size-base * 1.25;
+$h5-font-size:                $font-size-base * 1.15;
+$h6-font-size:                $font-size-base !default;
+
+// $primary:       #07689F;
+// $secondary:     #C9D6DF;
+// $success:       rgb(108, 175, 167);
+// $info:          #A2D5F2;
+// $warning:       rgb(250, 235, 168);//#FF7E67;
+// $danger:        #F67280;
+// $light:         #FAFAFA;
+// $dark:          #4e4e4e;
+
+
+
+/*
+$theme-colors: (
+   primary: #07689F,
+   secondary: #C9D6DF,
+   success: #11D3BC,
+   danger: #F67280,
+   info: #A2D5F2,
+   warning: #FF7E67,
+   light: #FAFAFA,
+   dark: #4e4e4e,
+);
+*/
+
+
+/*! `Fresca` Bootstrap 4 theme */
+
+
+
+// $primary:#07689F;
+$primary: #4484CE;
+$secondary:#C9D6DF;
+$success:#11D3BC;
+$danger:#F67280;
+$info:#A2D5F2;
+$warning:#FF7E67;
+$light:#FAFAFA;
+$dark:#4e4e4e;
+$footer-bg: #cee5ff;
+
+
+// Add SASS theme customizations here..
+
+
+.app-header{
+    padding-top: 20px;;
+}
+
+.droup-form{
+    width: 270px;
+    padding: 7px;
+}
+
+.form-login-center{
+    @extend .droup-form;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.message-login{
+    @extend .form-login-center;
+    margin-top: 45px;
+}
+
+.text-center{
+    text-align: center;
+}
+
+h1, h2, h3, h4, h5, h6 {
+   /* font-family: 'PT Sans', sans-serif; */
+   font-family: 'Oswald', sans-serif;
+}

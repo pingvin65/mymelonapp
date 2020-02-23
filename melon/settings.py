@@ -43,7 +43,7 @@ SECRET_KEY = os.environ.get('MELON_SECRET_KEY')
 # DEBUG = True
 DEBUG = os.environ.get('MELON_DEBUG')
 if DEBUG:
-    logger.debug(' DEBUG is {}'.format( os.environ.get('MELON_DEBUG')))
+    logger.debug(' DEBUG is {}'.format( DEBUG ))
 # list of allowed hosts
 ALLOWED_HOSTS = ["mymelonapp.herokuapp.com", "localhost", "127.0.0.1", "10.10.1.*"]
 # Application definition
@@ -102,7 +102,7 @@ WSGI_APPLICATION = 'melon.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 # if os.environ.get('MELON_DEBUG') not True, then the project it run on heroku
-if os.environ.get('MELON_DEBUG'):
+if DEBUG:
     DATABASES = {
         'default': {
                 'ENGINE': 'django.db.backends.postgresql_psycopg2',
