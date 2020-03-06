@@ -1,5 +1,27 @@
 # mymelonapp 
 The project was made for Heroku cloud platform as a service (PaaS) and on Ubuntu 18.04 was used for development. 
+## Layout of the website
+### Login page
+
+![Login page](./images/mymelonapp05.png "Login page")
+
+
+### List contacts
+
+![Login page](./images/mymelonapp04.png "Login page")
+
+### Contact details
+
+![Login page](./images/mymelonapp02.png "Login page")
+
+### Edit contact
+
+![Login page](./images/mymelonapp03.png "Login page")
+
+### New contact 
+
+![Login page](./images/mymelonapp01.png "Login page")
+
 ## How to Install PostgreSQL on Ubuntu 18.04
 Visit the site [Ubuntu documentation for PostgreSQL](https://help.ubuntu.com/lts/serverguide/postgresql.html) or [linuxize.com](https://linuxize.com/post/how-to-install-postgresql-on-ubuntu-18-04/) for more information.
 ##  Creating PostgreSQL Role and Database
